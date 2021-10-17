@@ -27,7 +27,6 @@ export const DataTable = ({ rows }: DataTableProps) => {
   };
 
   const onRowClick = (e: any) => {
-    console.log("rowdata", e);
     setSelectedRow(e.row);
     setShowModal(true);
   };
