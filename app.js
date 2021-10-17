@@ -1,3 +1,4 @@
+const serverless = require('serverless-http');
 const express = require('express');
 const app = express();
 const api_helper = require('./API_helper');
@@ -6,6 +7,8 @@ const url = require('url');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// THIS ONE WORKS WITH SERVERLESS YML PATH: path: /dev/api/breaches
+//app.get('/dev/api/breaches', (req, res) => {
 app.get('/api/breaches', (req, res) => {
   const queryObject = url.parse(req.url,true).query;
   const account = queryObject.account;
@@ -14,6 +17,7 @@ app.get('/api/breaches', (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST");
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type, Authorization");
+    res.setHeader("Access-Control-Allow_Credentials", true)
     res.json(response)
   })
   .catch(error => {
@@ -21,4 +25,5 @@ app.get('/api/breaches', (req, res) => {
   })
 })
 
-app.listen(3000, () => console.log(`Listening on: 3000`));
+// app.listen(3000, () => console.log(`Listening on: 3000`));
+module.exports.handler = serverless(app);
