@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-//http://localhost:3000/api/breaches?account=test@example.com
-
 export type breaches = {
     data: breach[];
 }
