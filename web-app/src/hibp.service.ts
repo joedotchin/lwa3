@@ -22,5 +22,6 @@ export type breach = {
 }
 
 export const getBreaches = async (account: string): Promise<breaches> => {
-    return await axios.get<breach[]>(`http://localhost:3000/api/breaches?account=${account}`);
+    // return await axios.get<breach[]>(`http://localhost:3000/api/breaches?account=${account}`);
+    return await axios.get<breach[]>(`https://9u351dm8j0.execute-api.us-east-1.amazonaws.com/dev/api/breaches?account=${account}`);
 }
