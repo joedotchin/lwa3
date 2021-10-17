@@ -10,5 +10,6 @@
     width: 25px;
 }
 
-
-/* renderCell: (cellValue) => (<div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignContent: 'center'}}><img src={cellValue?.value} style={{ height: '25px', width: '25px'}}/></div>) */
+.pwnCount {
+    text-align: right !important;
+}

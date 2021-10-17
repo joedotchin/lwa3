@@ -1,5 +1,8 @@
 
+import { Tooltip } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
+import Moment from 'moment';
+
 import './ColumnDefs.css';
 
 export const ColumnDefs = (): GridColDef[] => {
@@ -7,68 +10,90 @@ export const ColumnDefs = (): GridColDef[] => {
     {
         field: "Name",
         headerName: "Name",
-        description: "Name"
+        description: "Name",
+        flex: 0.5,
     },
     {
         field: "Title",
         headerName: "Title",
-        description: "Title"
+        description: "Title",
+        flex: 0.5
     },
     {
         field: "Domain",
         headerName: "Domain",
-        description: "Domain"
+        description: "Domain",
+        flex: 0.6
     },
     {
         field: "BreachDate",
         headerName: "Breach Date",
         type: "date",
-        description: "Breach Date"
+        description: "Breach Date",
+        flex: 0.35,
+        renderCell: (params) => (Moment(params.value as string).format('YYYY-MM-DD')),
+        cellClassName: 'dateCell'
+
     },
     {
         field: "AddedDate",
         headerName: "Added Date",
         type: "datetime",
-        description: "Added Date"
+        description: "Added Date",
+        flex: 0.35,
+        renderCell: (params) => (Moment(params.value as string).format('YYYY-MM-DD')),
+        cellClassName: 'dateCell'
     },
     {
         field: "ModifiedDate",
         headerName: "Modified Date",
         type: "datetime",
-        description: "Modified Date"
+        description: "Modified Date",
+        flex: 0.36,
+        renderCell: (params) => (Moment(params.value as string).format('YYYY-MM-DD'))
     },
     {
         field: "PwnCount",
         headerName: "Pwn Count",
-        description: "Pwn Count"
+        description: "Pwn Count",
+        flex: 0.4,
+        valueFormatter: (params) => (Number(params.value).toLocaleString()),
+        cellClassName: 'pwnCount'
     },
     {
         field: "Description",
         headerName: "Description",
-        description: "Description"
+        description: "Description",
+        flex: 0.6,
+        renderCell: (value) => (<Tooltip title={value?.value as string} followCursor={true}><span>{value?.value as string}</span></Tooltip>)
     },
     {
          field: "DataClasses",
          headerName: "Data Classes",
-         description: "Data Classes"
+         description: "Data Classes",
+         flex: 0.5,
+         renderCell: (value) => (<Tooltip title={value?.value as string} followCursor={true}><span>{value?.value as string}</span></Tooltip>)
     },
     {
         field: "IsVerified",
         headerName: "Verified",
         type: "boolean",
-        description: "Verified"
+        description: "Verified",
+        flex: 0.3
     },
     {
         field: "IsFabricated",
         headerName: "Fabricated",
         type: "boolean",
-        description: "Fabricated"
+        description: "Fabricated",
+        flex: 0.3
     },
     {
         field: "IsSensitive",
         headerName: "Sensitive",
         type: "boolean",
-        description: "Sensitive"
+        description: "Sensitive",
+        flex: 0.3
     },
     // HIBP has removed this data.
     // {
@@ -79,14 +104,15 @@ export const ColumnDefs = (): GridColDef[] => {
         field: "isSpamList",
         headerName: "Spam List",
         type: "boolean",
-        description: "Spam List"
+        description: "Spam List",
+        flex: 0.3
     },
     {
         field: "LogoPath",
-        headerName: "Logo Path",
+        headerName: "Logo",
         // @ts-ignore
-        //renderCell: (cellValue) => (<div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignContent: 'center'}}><img src={cellValue?.value} style={{ height: '25px', width: '25px'}}/></div>)
-        renderCell: (cellValue) => (<div className='logoContainer'><img src={cellValue?.value} className='logo'/></div>)
+        renderCell: (cellValue) => (<div className='logoContainer'><img src={cellValue?.value} className='logo'/></div>),
+        flex: 0.3
     },
 ]
 };
