@@ -26,7 +26,7 @@ app.get('/getAPIResponse', (req, res) => {
 app.get('/api/breaches', (req, res) => {
   const queryObject = url.parse(req.url,true).query;
   const account = queryObject.account;
-  api_helper.make_API_call(`https://haveibeenpwned.com/api/v3/breachedaccount/${account}`)
+  api_helper.make_API_call(`https://haveibeenpwned.com/api/v3/breachedaccount/${account}?truncateResponse=false`)
   .then(response => {
     res.json(response)
   })
