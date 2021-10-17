@@ -1,25 +1,22 @@
 import {
   DataGrid,
   GridColDef,
-  GridColumns,
   GridRowsProp,
 } from "@mui/x-data-grid";
-import { useEffect } from "react";
+
+import { ColumnDefs } from "./ColumnDefs";
+
+import './DataTable.css';
 
 export type DataTableProps = {
   rows: GridRowsProp;
-  columns: GridColDef[];
 };
 
-export const DataTable = ({ rows, columns }: DataTableProps) => {
-  useEffect(() => {
-    console.log("COLUMNS", columns);
-    console.log("ROWS", rows);
-  }, [rows, columns]);
-
+export const DataTable = ({ rows }: DataTableProps) => {
   return (
-    <div style={{ height: 300, width: "100%" }}>
-      <DataGrid columns={columns} rows={rows} />
+    // <div style={{ height: 300, width: "100%" }}>
+    <div className='container'>
+      <DataGrid columns={ColumnDefs} rows={rows} />
     </div>
   );
 };
