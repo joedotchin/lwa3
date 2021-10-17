@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const api_helper = require('./API_helper');
-
+const url = require('url');
 const http = require('http');
 
 app.use(express.urlencoded({ extended: true }));
@@ -24,7 +24,9 @@ app.get('/getAPIResponse', (req, res) => {
 })
 
 app.get('/api/breaches', (req, res) => {
-  api_helper.make_API_call('https://haveibeenpwned.com/api/v3/breachedaccount/test@example.com')
+  const queryObject = url.parse(req.url,true).query;
+  const account = queryObject.account;
+  api_helper.make_API_call(`https://haveibeenpwned.com/api/v3/breachedaccount/${account}`)
   .then(response => {
     res.json(response)
   })
@@ -32,26 +34,5 @@ app.get('/api/breaches', (req, res) => {
     res.send(error)
   })
 })
-
-
-// app.get('/api/breaches', (req, res) => {
-//   var options = {
-//     // host: "haveibeenpwned.com",
-//     url: "https://haveibeenpwned.com/api/v3/breachedaccount/test@example.com",
-//     method: "GET",
-//     headers: {
-//       "hibp-api-key": "195be73864154e71b48f0f8ea61e89bc",
-//       "user-agent": "lifeworks-advisors",
-//       "Cache-Control": "no-cache"
-//     },
-//   };
-//   // http.get(options, (msg) => {
-//   //   // res.send(hibpResponse);
-//   //   // console.log(hibpResponse);
-//   //   res.on('end')
-//   // })
-// })
-
-
 
 app.listen(3000, () => console.log(`Listening on: 3000`));
