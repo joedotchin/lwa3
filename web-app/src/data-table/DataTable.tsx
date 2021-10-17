@@ -16,7 +16,7 @@ export const DataTable = ({ rows }: DataTableProps) => {
   return (
     // <div style={{ height: 300, width: "100%" }}>
     <div className='container'>
-      <DataGrid columns={ColumnDefs} rows={rows} />
+      <DataGrid columns={ColumnDefs()} rows={rows} />
     </div>
   );
 };
